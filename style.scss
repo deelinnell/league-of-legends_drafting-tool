@@ -1,0 +1,147 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+    color: white;
+}
+
+body {
+    background-color: black;
+}
+
+.container {
+    width: 80%;
+}
+
+.ban-container {
+    width: 100%;
+    border: 1px solid white;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ban-container_blue,
+.ban-container_red {
+    height: 100%;
+    width: 25%;
+}
+
+.blue-bans,
+.red-bans {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 15px;
+    gap: 10px;
+}
+
+.red-bans {
+    position: absolute;
+    right: 0;
+}
+
+.ban-container_blue {
+    border: 1px solid blue;
+}
+
+.ban-container_red {
+    position: relative;
+    border: 1px solid red;
+}
+
+.ban-center {
+    border: 1px solid yellow;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    font-size: 32pt;
+}
+
+.ban {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 22pt;
+    border: 1px solid white;
+}
+
+.champion-container {
+    border: 1px solid yellow;
+    flex: 1;
+}
+
+.search-bar-container {
+    width: 100%;
+    border: 1px solid orange;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    padding: 10px;
+    border: 1px solid white;
+    color: black;
+}
+
+.search-bar input {
+    color: black;
+}
+
+.mag-glass {
+    padding-right: 5px;
+}
+
+.pick-container {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+
+.blue-container,
+.red-container {
+    border: 1px solid white;
+}
+
+#champion-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.champion-square {
+    width: 80px;
+    height: 100px;
+    text-align: center;
+    margin: 15px auto;
+}
+
+.champion-square:hover {
+    cursor: pointer;
+    outline: 3px double white;
+}
+
+.champion-portrait {
+    width: 80px;
+    height: 80px;
+    background-size: contain;
+}
+
+.champion-pick {
+    width: 200px;
+    height: 120px;
+    margin: 15px;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: row;
+}

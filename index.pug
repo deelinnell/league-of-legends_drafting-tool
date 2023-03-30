@@ -1,0 +1,60 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", type="text/css", href="style.css")
+        link(rel="stylesheet", type="text/css", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        script(type="module", src="index.js", defer)
+        title League of Legends Draft Tool
+    body 
+        .container
+            .ban-container
+                .ban-container_blue 
+                    .blue-bans
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+                .ban-center 
+                    h1#ban-status
+                .ban-container_red
+                    .red-bans
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+                        .ban 🛇
+            .pick-container
+                .blue-container
+                    .champion-pick#b1
+                        h3 B1
+                    .champion-pick#b2
+                        h3 B2
+                    .champion-pick#b3
+                        h3 B3
+                    .champion-pick#b4
+                        h3 B4
+                    .champion-pick#b5
+                        h3 B5
+                .champion-container
+                    .search-bar-container
+                        .search-bar
+                            button#champs Champs!
+                            .mag-glass
+                                i.fa.fa-search
+                            input(type="text", id="search", placeholder="Search")
+                    #champion-grid
+                .red-container
+                    .champion-pick#r1
+                        h3 R1
+                    .champion-pick#r2
+                        h3 R1
+                    .champion-pick#r3
+                        h3 R1
+                    .champion-pick#r4
+                        h3 R1
+                    .champion-pick#r5
+                        h3 R1

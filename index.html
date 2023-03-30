@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="module" src="index.js" defer></script>
+    <title>League of Legends Draft Tool</title>
+  </head>
+  <body> 
+    <div class="container">
+      <div class="ban-container">
+        <div class="ban-container_blue"> 
+          <div class="blue-bans">
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+          </div>
+        </div>
+        <div class="ban-center"> 
+          <h1 id="ban-status"></h1>
+        </div>
+        <div class="ban-container_red">
+          <div class="red-bans">
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+            <div class="ban">🛇</div>
+          </div>
+        </div>
+      </div>
+      <div class="pick-container">
+        <div class="blue-container">
+          <div class="champion-pick" id="b1">
+            <h3>B1</h3>
+          </div>
+          <div class="champion-pick" id="b2">
+            <h3>B2</h3>
+          </div>
+          <div class="champion-pick" id="b3">
+            <h3>B3</h3>
+          </div>
+          <div class="champion-pick" id="b4">
+            <h3>B4</h3>
+          </div>
+          <div class="champion-pick" id="b5">
+            <h3>B5</h3>
+          </div>
+        </div>
+        <div class="champion-container">
+          <div class="search-bar-container">
+            <div class="search-bar">
+              <button id="champs">Champs!</button>
+              <div class="mag-glass"><i class="fa fa-search"></i></div>
+              <input type="text" id="search" placeholder="Search">
+            </div>
+          </div>
+          <div id="champion-grid"></div>
+        </div>
+        <div class="red-container">
+          <div class="champion-pick" id="r1">
+            <h3>R1</h3>
+          </div>
+          <div class="champion-pick" id="r2">
+            <h3>R1</h3>
+          </div>
+          <div class="champion-pick" id="r3">
+            <h3>R1</h3>
+          </div>
+          <div class="champion-pick" id="r4">
+            <h3>R1</h3>
+          </div>
+          <div class="champion-pick" id="r5">
+            <h3>R1</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
