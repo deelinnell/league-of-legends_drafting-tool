@@ -160,6 +160,108 @@ const championPortraits = [
     'ZyraSquare.webp'
 ]
 
+const PICKORDER = [
+    'ban_b0',
+    'ban_r0',
+    'ban_b1',
+    'ban_r1',
+    'ban_b2',
+    'ban_r2',
+    'pick_b0',
+    'pick_r0',
+    'pick_b1',
+    'pick_r1',
+    'pick_b2',
+    'pick_r2',
+    'ban_b3',
+    'ban_r3',
+    'ban_b4',
+    'ban_r4',
+    'pick_b3',
+    'pick_r3',
+    'pick_b4',
+    'pick_r4',
+]
+
+const STATUS = [
+    'BLUE BAN',
+    'RED BAN',
+    'BLUE BAN',
+    'RED BAN',
+    'BLUE BAN',
+    'RED BAN',
+    'BLUE PICK',
+    'RED PICK',
+    'BLUE PICK',
+    'RED PICK',
+    'BLUE PICK',
+    'RED PICK',
+    'BLUE BAN',
+    'RED BAN',
+    'BLUE BAN',
+    'RED BAN',
+    'BLUE PICK',
+    'RED PICK',
+    'BLUE PICK',
+    'RED PICK',
+]
+
+let CURRENT = 0
+let SELECTED = ''
+const REMOVED = []
+
+async function main() {
+    const status = document.getElementById('ban_status')
+    const confirm = document.getElementById('confirm')
+    const undo = document.getElementById('undo')
+
+    confirm.onclick = () => {
+        if (CURRENT < 19) {
+            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid white'
+            document.getElementById(PICKORDER[CURRENT]).style.color = 'white'
+
+            CURRENT += 1
+
+            status.innerHTML = STATUS[CURRENT]
+            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
+            document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
+            confirm.style.backgroundColor = 'white'
+
+            let removed = championsArray.splice(SELECTED, 1)
+
+            REMOVED.push(removed.pop())
+            displayChampionImages(championsArray)
+        }
+    }
+    undo.onclick = () => {
+        if (CURRENT >= 0) {
+            document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = 'none'
+            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid white'
+            document.getElementById(PICKORDER[CURRENT]).style.color = 'white'
+
+            CURRENT -= 1
+
+            status.innerHTML = STATUS[CURRENT]
+            document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = 'none'
+            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
+            document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
+            confirm.style.backgroundColor = 'white'
+
+            let added = REMOVED.pop()
+
+            championsArray.push(added)
+            championsArray.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+            displayChampionImages(championsArray)
+
+        }
+    }
+}
+document.getElementById('ban_status').innerHTML = STATUS[CURRENT]
+document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
+document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
+
+main()
+
 function makeChampionsArray(array) {
     const newArray = []
     array.forEach(file => {
@@ -183,19 +285,24 @@ function getChampionName(file) {
 const championGrid = document.getElementById('champion-grid')
 
 function displayChampionImages(array) {
-    array.forEach(champ => {
-        displayChampionImage(champ)
+    championGrid.replaceChildren('')
+    array.forEach((champ, index) => {
+        displayChampionImage(champ, index)
     })
 }
 
-function displayChampionImage(champ) {
+function displayChampionImage(champ, index) {
     const div = document.createElement('div')
     div.classList.add('champion-square')
-    div.onclick = (e) => console.log(e)
 
     let fixed = fixUTF(champ.file)
     let img = createChampionImage(fixed)
-    div.appendChild(img)
+    div.appendChild(img.div)
+    div.onclick = () => {
+        document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = img.url
+        document.getElementById('confirm').style.backgroundColor = 'orangered'
+        SELECTED = index
+    }
 
     const p = document.createElement('p')
     p.innerHTML = champ.name
@@ -216,15 +323,18 @@ function fixUTF(file) {
 
 function createChampionImage(file) {
     const div = document.createElement('div')
+    const url = `url(images/${file})`
     div.classList.add('champion-portrait')
-    div.style.backgroundImage = `url(images/${file})`
-    return div
+    div.style.backgroundImage = url
+    return {
+        div,
+        url
+    }
 }
 
 function decode_utf8(string) {
     return decodeURIComponent(string)
 }
-
 
 const championsArray = makeChampionsArray(championPortraits)
 displayChampionImages(championsArray)
@@ -232,31 +342,15 @@ displayChampionImages(championsArray)
 const button = document.getElementById('champs')
 const searchBar = document.getElementById('search')
 
-button.onclick = () => {
-    console.log(championsArray)
-}
-
 searchBar.onkeyup = (e) => updateChampionImages(e)
 
 function updateChampionImages(e) {
     championGrid.replaceChildren('')
     championsArray.forEach(champion => {
         let name = champion.name.toLowerCase()
-        let value = e.target.value
+        let value = e.target.value.toLowerCase()
         if (name.includes(value)) {
             displayChampionImage(champion)
         }
     })
-}
-
-async function main() {
-    const status = document.getElementById('ban-status')
-    const blueBans = document.querySelector('.blue-bans').querySelectorAll('.ban')
-    const redBans = document.querySelector('.red-bans').querySelectorAll('.ban')
-
-    status.innerHTML = 'BLUE BAN'
-
-    function bans(number, bans) {
-
-    }
 }
