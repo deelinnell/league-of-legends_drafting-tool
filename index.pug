@@ -10,26 +10,35 @@ html(lang="en")
         title League of Legends Draft Tool
     body 
         .container
-            .ban_container
-                .ban_container-blue 
+            .ban_main-container
+                .ban_container.blue
                     .ban_blue
                         - for (let i = 0; i < 5; i++)
-                            .ban_champion-portrait(id=`ban_b${i}`) 🛇
+                            .ban_champion-portrait(id=`ban_b${i}`)
+                                p.ban_symbol 🛇
                 .ban_center 
-                    h1#ban_status
+                    .ban_stats-container
+                        h1#ban_status
                     .button-container
-                        button#confirm CONFIRM
-                        button#undo ↺
-                .ban_container-red
+                        button#confirm
+                            .background
+                            p.start START
+                        .button-container_right
+                            button#back ⇐
+                            button#reset ↺
+                .ban_container.red
                     .ban_red
                         - for (let i = 0; i < 5; i++)
-                            .ban_champion-portrait(id=`ban_r${i}`) 🛇
-            .pick_container
-                .pick_container-blue
+                            .ban_champion-portrait(id=`ban_r${i}`)
+                                p.ban_symbol 🛇
+            .pick_container-main
+                .pick_container.blue
                     - for (let i = 0; i < 5; i++)
                         .champion-pick
                             h3 B#{i + 1}
-                            .pick_champion-portrait(id=`pick_b${i}`)
+                            .pick_champion-container
+                                .pick_champion-background
+                                .pick_champion-portrait(id=`pick_b${i}`)
                 .champion_container
                     .search-bar_container
                         .search-bar
@@ -37,8 +46,10 @@ html(lang="en")
                                 i.fa.fa-search
                             input(type="text", id="search", placeholder="Search")
                     #champion-grid
-                .pick_container-red
+                .pick_container.red
                     - for (let i = 0; i < 5; i++)
                         .champion-pick
-                            .pick_champion-portrait(id=`pick_r${i}`)
+                            .pick_champion-container
+                                .pick_champion-background
+                                .pick_champion-portrait(id=`pick_r${i}`)
                             h3 R#{i + 1}

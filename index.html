@@ -11,54 +11,97 @@
   </head>
   <body> 
     <div class="container">
-      <div class="ban_container">
-        <div class="ban_container-blue"> 
+      <div class="ban_main-container">
+        <div class="ban_container blue">
           <div class="ban_blue">
-            <div class="ban_champion-portrait" id="ban_b0">🛇</div>
-            <div class="ban_champion-portrait" id="ban_b1">🛇</div>
-            <div class="ban_champion-portrait" id="ban_b2">🛇</div>
-            <div class="ban_champion-portrait" id="ban_b3">🛇</div>
-            <div class="ban_champion-portrait" id="ban_b4">🛇</div>
+            <div class="ban_champion-portrait" id="ban_b0">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_b1">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_b2">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_b3">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_b4">
+              <p class="ban_symbol">🛇</p>
+            </div>
           </div>
         </div>
         <div class="ban_center"> 
-          <h1 id="ban_status"></h1>
+          <div class="ban_stats-container">
+            <h1 id="ban_status"></h1>
+          </div>
           <div class="button-container">
-            <button id="confirm">CONFIRM</button>
-            <button id="undo">↺</button>
+            <button id="confirm">
+              <div class="background"></div>
+              <p class="start">START</p>
+            </button>
+            <div class="button-container_right">
+              <button id="back">⇐</button>
+              <button id="reset">↺</button>
+            </div>
           </div>
         </div>
-        <div class="ban_container-red">
+        <div class="ban_container red">
           <div class="ban_red">
-            <div class="ban_champion-portrait" id="ban_r0">🛇</div>
-            <div class="ban_champion-portrait" id="ban_r1">🛇</div>
-            <div class="ban_champion-portrait" id="ban_r2">🛇</div>
-            <div class="ban_champion-portrait" id="ban_r3">🛇</div>
-            <div class="ban_champion-portrait" id="ban_r4">🛇</div>
+            <div class="ban_champion-portrait" id="ban_r0">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_r1">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_r2">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_r3">
+              <p class="ban_symbol">🛇</p>
+            </div>
+            <div class="ban_champion-portrait" id="ban_r4">
+              <p class="ban_symbol">🛇</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="pick_container">
-        <div class="pick_container-blue">
+      <div class="pick_container-main">
+        <div class="pick_container blue">
           <div class="champion-pick">
             <h3>B1</h3>
-            <div class="pick_champion-portrait" id="pick_b0"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_b0"></div>
+            </div>
           </div>
           <div class="champion-pick">
             <h3>B2</h3>
-            <div class="pick_champion-portrait" id="pick_b1"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_b1"></div>
+            </div>
           </div>
           <div class="champion-pick">
             <h3>B3</h3>
-            <div class="pick_champion-portrait" id="pick_b2"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_b2"></div>
+            </div>
           </div>
           <div class="champion-pick">
             <h3>B4</h3>
-            <div class="pick_champion-portrait" id="pick_b3"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_b3"></div>
+            </div>
           </div>
           <div class="champion-pick">
             <h3>B5</h3>
-            <div class="pick_champion-portrait" id="pick_b4"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_b4"></div>
+            </div>
           </div>
         </div>
         <div class="champion_container">
@@ -70,25 +113,40 @@
           </div>
           <div id="champion-grid"></div>
         </div>
-        <div class="pick_container-red">
+        <div class="pick_container red">
           <div class="champion-pick">
-            <div class="pick_champion-portrait" id="pick_r0"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_r0"></div>
+            </div>
             <h3>R1</h3>
           </div>
           <div class="champion-pick">
-            <div class="pick_champion-portrait" id="pick_r1"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_r1"></div>
+            </div>
             <h3>R2</h3>
           </div>
           <div class="champion-pick">
-            <div class="pick_champion-portrait" id="pick_r2"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_r2"></div>
+            </div>
             <h3>R3</h3>
           </div>
           <div class="champion-pick">
-            <div class="pick_champion-portrait" id="pick_r3"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_r3"></div>
+            </div>
             <h3>R4</h3>
           </div>
           <div class="champion-pick">
-            <div class="pick_champion-portrait" id="pick_r4"></div>
+            <div class="pick_champion-container">
+              <div class="pick_champion-background"></div>
+              <div class="pick_champion-portrait" id="pick_r4"></div>
+            </div>
             <h3>R5</h3>
           </div>
         </div>

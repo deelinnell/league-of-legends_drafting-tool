@@ -13,7 +13,7 @@ body {
   max-height: 900px;
 }
 
-.ban_container {
+.ban_main-container {
   width: 100%;
   height: 150px;
   display: flex;
@@ -22,21 +22,29 @@ body {
   align-items: center;
 }
 
-.ban_container-blue,
-.ban_container-red {
+.ban_container {
   height: 100%;
   width: 25%;
+  border-radius: 0 0 15px 15px;
 }
 
-.ban_container-blue {
-  background-color: rgb(0, 0, 12);
+.ban_container.blue {
+  background-color: rgb(0, 0, 26);
   border: 1px solid blue;
+  box-shadow: 1px 1px 10px blue;
+}
+.ban_container.blue .ban_champion-portrait {
+  background-color: rgb(0, 0, 26);
 }
 
-.ban_container-red {
+.ban_container.red {
   position: relative;
-  background-color: rgb(17, 0, 0);
+  background-color: rgb(26, 0, 0);
   border: 1px solid red;
+  box-shadow: 1px 1px 10px red;
+}
+.ban_container.red .ban_champion-portrait {
+  background-color: rgb(26, 0, 0);
 }
 
 .ban_blue,
@@ -67,119 +75,274 @@ body {
   width: fit-content;
 }
 
+.ban_stats-container {
+  height: 60%;
+}
+
 #ban_status {
-  font-size: 40pt;
+  margin-top: 10px;
+  font-size: 50pt;
+  font-weight: bold;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.button-container {
+  position: relative;
+  width: 100%;
 }
 
 #confirm {
-  color: black;
-  font-size: 18pt;
-  padding: 5px;
+  position: relative;
+  color: white;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: 150px;
+  height: 60px;
+  font-size: 20pt;
+  font-weight: bold;
+  border-radius: 7px;
+  border: 2px solid #999;
+  background: transparent;
+  border-bottom: none;
+  outline: 1px solid #ccc;
+  transition: 0.3s;
+}
+#confirm:hover {
+  animation: confirm 2s infinite;
+  border-color: gold;
+  outline: 1px solid goldenrod;
+}
+#confirm:hover p {
+  color: gold;
+}
+#confirm .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/start_button.png");
+  background-size: cover;
+  border-radius: inherit;
+  filter: grayscale(65%);
+  z-index: -1;
+}
+#confirm p {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  text-shadow: 0 2px 10px black;
 }
 
-#undo {
+#confirm.active {
+  border-color: gold;
+  outline: 1px solid goldenrod;
+  border-radius: 12px 0;
+}
+#confirm.active p {
+  color: gold;
+}
+#confirm.active .background {
+  animation: confirm 2s infinite;
+  filter: none;
+}
+
+@keyframes confirm {
+  0% {
+    box-shadow: inset 0 0 5px goldenrod;
+  }
+  50% {
+    box-shadow: inset 0 0 20px goldenrod;
+  }
+  100% {
+    box-shadow: inset 0 0 5px goldenrod;
+  }
+}
+.button-container_right {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  translate: 0% -50%;
+}
+
+#reset,
+#back {
   background-color: goldenrod;
-  border: 1px solid goldenrod;
-  color: yellow;
+  border: 1px solid white;
+  color: white;
   padding: 3px 8px;
   font-size: 24pt;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.3215686275);
+  text-shadow: 0 2px 10px black;
+}
+#reset:hover,
+#back:hover {
+  border-color: gold;
+  outline: 1px solid goldenrod;
+  background-color: #333;
+  color: gold;
+  box-shadow: inset 0 0 5px goldenrod;
 }
 
-#confirm:hover {
+#confirm:hover,
+#reset:hover,
+#back:hover {
   cursor: pointer;
 }
 
 .ban_champion-portrait {
+  position: relative;
   width: 50px;
   height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  outline: 1px solid white;
+  outline: 1px solid #666;
   font-size: 22pt;
   background-size: contain;
 }
 
+.ban_symbol {
+  color: inherit;
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  translate: -50%;
+  transition: 1s;
+}
+
 .champion_container {
   flex: 1;
+  margin: 15px auto;
+  background-image: url("images/summonersrift.jpg");
+  background-size: 135%;
+  background-position: 53.5% 10%;
+  border-radius: 15px 15px 0 0;
 }
 
 .search-bar_container {
   width: 100%;
-  background-color: rgb(153, 99, 0);
+  background-color: rgba(255, 255, 255, 0.231372549);
+  border-radius: 15px 15px 0 0;
   padding: 5px 0;
+  border-bottom: 1px solid #888;
 }
 
 .search-bar {
+  position: relative;
+  left: -7px;
   display: flex;
   flex-direction: row;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 10px;
+  padding: 5px 15px;
   border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.3019607843);
   color: black;
+  border-radius: 7px;
 }
 
 .search-bar input {
+  padding-left: 5px;
   color: black;
+  font-size: 14pt;
+  width: 200px;
 }
 
 .mag-glass {
   padding-right: 5px;
+  font-size: 14pt;
 }
 
-.pick_container {
+.pick_container-main {
   display: flex;
   flex-direction: row;
   height: -moz-fit-content;
   height: fit-content;
 }
 
-.pick_container-blue {
-  background-color: rgb(0, 0, 12);
-  border-top: 1px solid blue;
-  border-right: 1px solid blue;
-}
-
-.pick_container-red {
-  background-color: rgb(17, 0, 0);
-  border-top: 1px solid red;
-  border-left: 1px solid red;
+.pick_container {
+  margin-top: 10px;
 }
 
 #champion-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   overflow-y: scroll;
-  max-height: 700px;
+  max-height: 650px;
+  text-shadow: 0px 1px 15px black;
+}
+#champion-grid::-webkit-scrollbar {
+  width: 14px;
+}
+#champion-grid::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(102, 102, 102, 0.8784313725);
+}
+#champion-grid::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.6039215686);
+}
+#champion-grid::-webkit-scrollbar-thumb:hover {
+  background: #666;
 }
 
 .champion-square {
-  width: 80px;
-  height: 100px;
+  width: 90px;
+  height: 110px;
   text-align: center;
-  margin: 15px auto;
+  margin: 5px auto;
+  padding: 5px;
+  transition: 0.3s;
 }
 
 .champion-square:hover {
   cursor: pointer;
-  outline: 3px double white;
+  box-shadow: inset 0 0 25px #888;
+  outline: 2px solid #666;
+  border-radius: 5px;
+}
+.champion-square:hover .champion-portrait {
+  border-radius: 5px;
 }
 
+.champion-square.active {
+  outline: 2px solid goldenrod;
+  border-radius: 15px 0;
+  animation: championSelected 2s infinite;
+}
+.champion-square.active p {
+  color: goldenrod;
+}
+.champion-square.active .champion-portrait {
+  border-radius: 10px 0;
+}
+
+@keyframes championSelected {
+  0% {
+    box-shadow: inset 0 0 5px gold;
+  }
+  50% {
+    box-shadow: inset 0 0 30px gold;
+  }
+  100% {
+    box-shadow: inset 0 0 5px gold;
+  }
+}
 .champion-portrait {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   background-size: contain;
 }
 
-.pick_container-blue .champion-pick {
+.pick_container.blue .champion-pick {
+  background-color: rgb(0, 0, 26);
   border: 1px solid blue;
+  box-shadow: 0px 2px 8px blue;
 }
 
-.pick_container-red .champion-pick {
+.pick_container.red .champion-pick {
+  background-color: rgb(26, 0, 0);
   border: 1px solid red;
+  box-shadow: 0px 2px 8px red;
 }
 
 .champion-pick {
@@ -190,18 +353,375 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background: transparent;
 }
 
-.pick_container-blue .pick_champion-portrait {
+.pick_container.blue .pick_champion-container {
   border: 1px solid blue;
 }
 
-.pick_container-red .pick_champion-portrait {
+.pick_container.red .pick_champion-container {
   border: 1px solid red;
 }
 
-.pick_champion-portrait {
+.pick_champion-container {
+  position: relative;
   width: 80px;
   height: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+}
+
+.pick_container.blue .pick_champion-container {
+  box-shadow: 0px 5px 15px blue;
+}
+
+.pick_container.red .pick_champion-container {
+  box-shadow: 0px 5px 15px red;
+}
+
+.pick_champion-background {
+  position: absolute;
+  width: 90%;
+  height: 90%;
   background-size: contain;
+  background-image: url("images/helmet.png");
+  filter: grayscale(100%);
+}
+
+.pick_champion-portrait {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+}
+
+.ban_container.blue.active {
+  animation: activeBlueBan 2s infinite;
+}
+
+.ban_container.red.active {
+  animation: activeRed 2s infinite;
+}
+
+@keyframes activeBlueBan {
+  0% {
+    background-color: hsl(240, 100%, 5%);
+  }
+}
+@keyframes activeBlueBan {
+  1% {
+    background-color: hsl(240, 100%, 6%);
+  }
+}
+@keyframes activeBlueBan {
+  2% {
+    background-color: hsl(240, 100%, 7%);
+  }
+}
+@keyframes activeBlueBan {
+  3% {
+    background-color: hsl(240, 100%, 8%);
+  }
+}
+@keyframes activeBlueBan {
+  4% {
+    background-color: hsl(240, 100%, 9%);
+  }
+}
+@keyframes activeBlueBan {
+  5% {
+    background-color: hsl(240, 100%, 10%);
+  }
+}
+@keyframes activeBlueBan {
+  6% {
+    background-color: hsl(240, 100%, 11%);
+  }
+}
+@keyframes activeBlueBan {
+  7% {
+    background-color: hsl(240, 100%, 12%);
+  }
+}
+@keyframes activeBlueBan {
+  8% {
+    background-color: hsl(240, 100%, 13%);
+  }
+}
+@keyframes activeBlueBan {
+  9% {
+    background-color: hsl(240, 100%, 14%);
+  }
+}
+@keyframes activeBlueBan {
+  10% {
+    background-color: hsl(240, 100%, 15%);
+  }
+}
+@keyframes activeBlueBan {
+  11% {
+    background-color: hsl(240, 100%, 16%);
+  }
+}
+@keyframes activeBlueBan {
+  12% {
+    background-color: hsl(240, 100%, 17%);
+  }
+}
+@keyframes activeBlueBan {
+  13% {
+    background-color: hsl(240, 100%, 18%);
+  }
+}
+@keyframes activeBlueBan {
+  14% {
+    background-color: hsl(240, 100%, 19%);
+  }
+}
+@keyframes activeBlueBan {
+  15% {
+    background-color: hsl(240, 100%, 20%);
+  }
+}
+@keyframes activeBlueBan {
+  16% {
+    background-color: hsl(240, 100%, 21%);
+  }
+}
+@keyframes activeBlueBan {
+  17% {
+    background-color: hsl(240, 100%, 22%);
+  }
+}
+@keyframes activeBlueBan {
+  18% {
+    background-color: hsl(240, 100%, 23%);
+  }
+}
+@keyframes activeBlueBan {
+  19% {
+    background-color: hsl(240, 100%, 24%);
+  }
+}
+.ban_champion-portrait.active {
+  color: red;
+  outline: 1px solid red;
+}
+.ban_champion-portrait.active p {
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+
+.pick_container.blue .champion-pick.active {
+  animation: activeBlue 2s infinite;
+}
+
+.pick_container.red .champion-pick.active {
+  animation: activeRed 2s infinite;
+}
+
+@keyframes activeBlue {
+  0% {
+    background-color: hsl(240, 100%, 5%);
+  }
+}
+@keyframes activeBlue {
+  1% {
+    background-color: hsl(240, 100%, 6%);
+  }
+}
+@keyframes activeBlue {
+  2% {
+    background-color: hsl(240, 100%, 7%);
+  }
+}
+@keyframes activeBlue {
+  3% {
+    background-color: hsl(240, 100%, 8%);
+  }
+}
+@keyframes activeBlue {
+  4% {
+    background-color: hsl(240, 100%, 9%);
+  }
+}
+@keyframes activeBlue {
+  5% {
+    background-color: hsl(240, 100%, 10%);
+  }
+}
+@keyframes activeBlue {
+  6% {
+    background-color: hsl(240, 100%, 11%);
+  }
+}
+@keyframes activeBlue {
+  7% {
+    background-color: hsl(240, 100%, 12%);
+  }
+}
+@keyframes activeBlue {
+  8% {
+    background-color: hsl(240, 100%, 13%);
+  }
+}
+@keyframes activeBlue {
+  9% {
+    background-color: hsl(240, 100%, 14%);
+  }
+}
+@keyframes activeBlue {
+  10% {
+    background-color: hsl(240, 100%, 15%);
+  }
+}
+@keyframes activeBlue {
+  11% {
+    background-color: hsl(240, 100%, 16%);
+  }
+}
+@keyframes activeBlue {
+  12% {
+    background-color: hsl(240, 100%, 17%);
+  }
+}
+@keyframes activeBlue {
+  13% {
+    background-color: hsl(240, 100%, 18%);
+  }
+}
+@keyframes activeBlue {
+  14% {
+    background-color: hsl(240, 100%, 19%);
+  }
+}
+@keyframes activeBlue {
+  15% {
+    background-color: hsl(240, 100%, 20%);
+  }
+}
+@keyframes activeBlue {
+  16% {
+    background-color: hsl(240, 100%, 21%);
+  }
+}
+@keyframes activeBlue {
+  17% {
+    background-color: hsl(240, 100%, 22%);
+  }
+}
+@keyframes activeBlue {
+  18% {
+    background-color: hsl(240, 100%, 23%);
+  }
+}
+@keyframes activeBlue {
+  19% {
+    background-color: hsl(240, 100%, 24%);
+  }
+}
+@keyframes activeRed {
+  0% {
+    background-color: hsl(0, 100%, 5%);
+  }
+}
+@keyframes activeRed {
+  1% {
+    background-color: hsl(0, 100%, 6%);
+  }
+}
+@keyframes activeRed {
+  2% {
+    background-color: hsl(0, 100%, 7%);
+  }
+}
+@keyframes activeRed {
+  3% {
+    background-color: hsl(0, 100%, 8%);
+  }
+}
+@keyframes activeRed {
+  4% {
+    background-color: hsl(0, 100%, 9%);
+  }
+}
+@keyframes activeRed {
+  5% {
+    background-color: hsl(0, 100%, 10%);
+  }
+}
+@keyframes activeRed {
+  6% {
+    background-color: hsl(0, 100%, 11%);
+  }
+}
+@keyframes activeRed {
+  7% {
+    background-color: hsl(0, 100%, 12%);
+  }
+}
+@keyframes activeRed {
+  8% {
+    background-color: hsl(0, 100%, 13%);
+  }
+}
+@keyframes activeRed {
+  9% {
+    background-color: hsl(0, 100%, 14%);
+  }
+}
+@keyframes activeRed {
+  10% {
+    background-color: hsl(0, 100%, 15%);
+  }
+}
+@keyframes activeRed {
+  11% {
+    background-color: hsl(0, 100%, 16%);
+  }
+}
+@keyframes activeRed {
+  12% {
+    background-color: hsl(0, 100%, 17%);
+  }
+}
+@keyframes activeRed {
+  13% {
+    background-color: hsl(0, 100%, 18%);
+  }
+}
+@keyframes activeRed {
+  14% {
+    background-color: hsl(0, 100%, 19%);
+  }
+}
+@keyframes activeRed {
+  15% {
+    background-color: hsl(0, 100%, 20%);
+  }
+}
+@keyframes activeRed {
+  16% {
+    background-color: hsl(0, 100%, 21%);
+  }
+}
+@keyframes activeRed {
+  17% {
+    background-color: hsl(0, 100%, 22%);
+  }
+}
+@keyframes activeRed {
+  18% {
+    background-color: hsl(0, 100%, 23%);
+  }
+}
+@keyframes activeRed {
+  19% {
+    background-color: hsl(0, 100%, 24%);
+  }
 }/*# sourceMappingURL=style.css.map */

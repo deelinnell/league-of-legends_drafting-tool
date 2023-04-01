@@ -169,16 +169,16 @@ const PICKORDER = [
     'ban_r2',
     'pick_b0',
     'pick_r0',
-    'pick_b1',
     'pick_r1',
+    'pick_b1',
     'pick_b2',
     'pick_r2',
     'ban_b3',
     'ban_r3',
     'ban_b4',
     'ban_r4',
-    'pick_b3',
     'pick_r3',
+    'pick_b3',
     'pick_b4',
     'pick_r4',
 ]
@@ -210,57 +210,159 @@ let CURRENT = 0
 let SELECTED = ''
 const REMOVED = []
 
-async function main() {
-    const status = document.getElementById('ban_status')
-    const confirm = document.getElementById('confirm')
-    const undo = document.getElementById('undo')
+const statusText = document.getElementById('ban_status')
+const confirmButton = document.getElementById('confirm')
+const resetButton = document.getElementById('reset')
+const backButton = document.getElementById('back')
 
-    confirm.onclick = () => {
-        if (CURRENT < 19) {
-            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid white'
-            document.getElementById(PICKORDER[CURRENT]).style.color = 'white'
+function onClick() {
+    document.onkeydown = (e) => e.key == 'Enter' ? confirmChampion() : null
+    confirmButton.onclick = () => confirmChampion()
+    backButton.onclick = () => backButtonActive()
+    resetButton.onclick = () => resetButtonActive()
+}
 
-            CURRENT += 1
+confirmButton.onclick = () => start()
 
-            status.innerHTML = STATUS[CURRENT]
-            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
-            document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
-            confirm.style.backgroundColor = 'white'
+function start() {
+    let ACTIVE = document.getElementById(PICKORDER[CURRENT])
 
-            let removed = championsArray.splice(SELECTED, 1)
+    confirmButton.lastElementChild.innerHTML = 'ENTER'
+    document.getElementById('ban_status').innerHTML = STATUS[CURRENT]
+    ACTIVE.classList.add('active')
+    ACTIVE.closest('.ban_container').classList.add('active')
+    displayChampionImages(championsArray)
+    onClick()
+}
 
-            REMOVED.push(removed.pop())
-            displayChampionImages(championsArray)
-        }
+function resetButtonActive() {
+    PICKORDER.forEach(id => {
+        document.getElementById(id).style.backgroundImage = 'none'
+        document.getElementById(id).classList.remove('active')
+    })
+    const ban = document.querySelectorAll('.ban_container')
+    for (let i = 0; i < ban.length; i++) {
+        ban[i].classList.remove('active')
     }
-    undo.onclick = () => {
-        if (CURRENT >= 0) {
-            document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = 'none'
-            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid white'
-            document.getElementById(PICKORDER[CURRENT]).style.color = 'white'
+    const pick = document.querySelectorAll('.champion-pick')
+    for (let i = 0; i < pick.length; i++) {
+        pick[i].classList.remove('active')
+    }
+    confirmButton.classList.remove('active')
 
+    for (let i = 0; i < REMOVED.length; i++) {
+        let champ = REMOVED.pop()
+        championsArray.push(champ)
+    }
+    championsArray.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+
+    SELECTED = ''
+    CURRENT = 0
+    start()
+}
+
+function backButtonActive() {
+    let ACTIVE = document.getElementById(PICKORDER[CURRENT])
+
+    if (CURRENT >= 0) {
+        if (CURRENT == 0) {
+            ACTIVE.style.backgroundImage = 'none'
+            ACTIVE.closest('.ban_container').classList.remove('active')
+            ACTIVE.classList.remove('active')
+            confirmButton.lastElementChild.innerHTML = 'START'
+            confirmButton.onclick = () => start()
+            championGrid.replaceChildren()
+            return
+        }
+        if (CURRENT == 20) {
             CURRENT -= 1
+            ACTIVE = document.getElementById(PICKORDER[CURRENT])
 
-            status.innerHTML = STATUS[CURRENT]
-            document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = 'none'
-            document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
-            document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
-            confirm.style.backgroundColor = 'white'
-
+            ACTIVE.style.backgroundImage = 'none'
             let added = REMOVED.pop()
-
             championsArray.push(added)
             championsArray.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
             displayChampionImages(championsArray)
-
+            ACTIVE.closest('.champion-pick').classList.add('active')
+            SELECTED = ''
+            return
         }
+
+        ACTIVE.style.backgroundImage = 'none'
+
+        if (CURRENT < 6 || CURRENT > 11 && CURRENT < 16) {
+            ACTIVE.closest('.ban_container').classList.remove('active')
+            ACTIVE.classList.remove('active')
+        } else {
+            ACTIVE.closest('.champion-pick').classList.remove('active')
+        }
+
+        CURRENT -= 1
+        ACTIVE = document.getElementById(PICKORDER[CURRENT])
+
+        if (CURRENT < 6 || CURRENT > 11 && CURRENT < 16) {
+            ACTIVE.closest('.ban_container').classList.add('active')
+            ACTIVE.classList.add('active')
+        } else {
+            ACTIVE.closest('.champion-pick').classList.add('active')
+        }
+
+        statusText.innerHTML = STATUS[CURRENT]
+        ACTIVE.style.backgroundImage = 'none'
+
+        confirmButton.classList.remove('active')
+
+        let added = REMOVED.pop()
+        championsArray.push(added)
+        championsArray.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+        displayChampionImages(championsArray)
+        SELECTED = ''
     }
 }
-document.getElementById('ban_status').innerHTML = STATUS[CURRENT]
-document.getElementById(PICKORDER[CURRENT]).style.outline = '1px solid red'
-document.getElementById(PICKORDER[CURRENT]).style.color = 'red'
 
-main()
+function confirmChampion() {
+    let ACTIVE = document.getElementById(PICKORDER[CURRENT])
+
+    if (CURRENT < 19) {
+        if (SELECTED === '') return
+
+        if (CURRENT < 6 || CURRENT > 11 && CURRENT < 16) {
+            ACTIVE.closest('.ban_container').classList.remove('active')
+            ACTIVE.classList.remove('active')
+        } else {
+            ACTIVE.closest('.champion-pick').classList.remove('active')
+        }
+
+        CURRENT += 1
+        ACTIVE = document.getElementById(PICKORDER[CURRENT])
+
+        statusText.innerHTML = STATUS[CURRENT]
+
+        if (CURRENT < 6 || CURRENT > 11 && CURRENT < 16) {
+            ACTIVE.closest('.ban_container').classList.add('active')
+            ACTIVE.classList.add('active')
+        } else {
+            ACTIVE.closest('.champion-pick').classList.add('active')
+        }
+
+        confirmButton.classList.remove('active')
+
+        let removed = championsArray.splice(SELECTED, 1).pop()
+        REMOVED.push(removed)
+
+        displayChampionImages(championsArray)
+        document.getElementById('search').value = ''
+        SELECTED = ''
+    } else if (CURRENT === 19) {
+        let removed = championsArray.splice(SELECTED, 1).pop()
+        REMOVED.push(removed)
+        ACTIVE.closest('.champion-pick').classList.remove('active')
+        confirmButton.classList.remove('active')
+        championGrid.replaceChildren()
+        CURRENT += 1
+        return
+    }
+}
 
 function makeChampionsArray(array) {
     const newArray = []
@@ -285,7 +387,7 @@ function getChampionName(file) {
 const championGrid = document.getElementById('champion-grid')
 
 function displayChampionImages(array) {
-    championGrid.replaceChildren('')
+    championGrid.replaceChildren()
     array.forEach((champ, index) => {
         displayChampionImage(champ, index)
     })
@@ -300,10 +402,11 @@ function displayChampionImage(champ, index) {
     div.appendChild(img.div)
     div.onclick = () => {
         document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = img.url
-        document.getElementById('confirm').style.backgroundColor = 'orangered'
+        confirmButton.classList.add('active')
+        if (SELECTED !== '') championGrid.childNodes[SELECTED].classList.remove('active')
+        championGrid.childNodes[index].classList.add('active')
         SELECTED = index
     }
-
     const p = document.createElement('p')
     p.innerHTML = champ.name
     div.appendChild(p)
@@ -323,7 +426,7 @@ function fixUTF(file) {
 
 function createChampionImage(file) {
     const div = document.createElement('div')
-    const url = `url(images/${file})`
+    const url = `url(images/champions/${file})`
     div.classList.add('champion-portrait')
     div.style.backgroundImage = url
     return {
@@ -337,20 +440,24 @@ function decode_utf8(string) {
 }
 
 const championsArray = makeChampionsArray(championPortraits)
-displayChampionImages(championsArray)
-
-const button = document.getElementById('champs')
 const searchBar = document.getElementById('search')
 
 searchBar.onkeyup = (e) => updateChampionImages(e)
 
 function updateChampionImages(e) {
-    championGrid.replaceChildren('')
-    championsArray.forEach(champion => {
-        let name = champion.name.toLowerCase()
+    championGrid.replaceChildren()
+    confirmButton.classList.remove('active')
+    document.getElementById(PICKORDER[CURRENT]).style.backgroundImage = 'none'
+    SELECTED = ''
+    const filtered = []
+    championsArray.forEach((champ) => {
+        let name = champ.name.toLowerCase()
         let value = e.target.value.toLowerCase()
         if (name.includes(value)) {
-            displayChampionImage(champion)
+            filtered.push(champ)
         }
+    })
+    filtered.forEach((champ, index) => {
+        displayChampionImage(champ, index)
     })
 }
